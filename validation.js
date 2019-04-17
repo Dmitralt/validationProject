@@ -4,6 +4,7 @@ var jsonContent = JSON.parse(contents);
 
 var reg_PRICE_ACTION = new RegExp('[0-9].[0-9][0-9]');//выражение для проверки в поле PRICE_ACTION
 var reg_SIZE = new RegExp('[0-9]');//выражение для проверки в поле SIZE
+var reg_PHOTO = new RegExp('[0-9]');//выражение для проверки в поле PHOTO
 for(var key in jsonContent)
 {
 
@@ -238,6 +239,16 @@ for(var key in jsonContent)
    else if(Array.isArray(jsonContent[key]["PHOTO"])=="false")
     {
         console.log(" Error!!!  Ключ объекта ="+key+"; Поле с ошибкой = PHOTO must be array");
+    }
+    else 
+    {
+        for(var i in jsonContent[key]["PHOTO"])
+        {
+            if(reg_PHOTO.test(jsonContent[key]["PHOTO"][i])==false)
+            {
+            console.log("Error!!! Ключ объекта ="+key+"; Поле с ошибкой = PHOTO. тип элементов должен быть строкой с числом");
+            }
+        }
     }
 }
 
